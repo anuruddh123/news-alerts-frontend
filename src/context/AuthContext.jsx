@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
   const navigate = useNavigate();
 
-  const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' });
+  const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'https://news-alerts-backend.onrender.com/api' });
   api.interceptors.request.use((config) => {
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   const initializeSocket = () => {
     if (socket || !token) return;
-    const newSocket = io(import.meta.env.VITE_API_URL || 'http://localhost:5000', {
+    const newSocket = io(import.meta.env.VITE_API_URL || 'https://news-alerts-backend.onrender.com', {
       auth: { token },
     });
     newSocket.on('connect', () => {
